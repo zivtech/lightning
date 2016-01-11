@@ -1,0 +1,47 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\workbench_moderation\Entity\ModerationState;
+use Drupal\workbench_moderation\Entity\ModerationStateTransition;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function lightning_workflow_form_moderation_state_add_form_alter(array &$form, FormStateInterface $form_state) {
+  $form['transitions'] = [
+    '#title' => t('Allow transitions to'),
+    '#type' => 'checkboxes',
+    '#required' => TRUE,
+    '#options' => [],
+  ];
+  foreach (ModerationState::loadMultiple() as $state) {
+    $form['transitions']['#options'][$state->id()] = $state->label();
+  }
+  $form['actions']['submit']['#submit'][] = 'lightning_workflow_create_transitions';
+}
+
+/**
+ * Form submit handler. Creates transitions from a new moderation state to
+ * other existing moderation states.
+ */
+function lightning_workflow_create_transitions(array &$form, FormStateInterface $form_state) {
+  $values = $form_state->getValues();
+
+  ModerationStateTransition::create([
+    'id' => $values['id'],
+    'status' => TRUE,
+    'label' => $values['label'] . ' » ' . $values['label'],
+    'stateFrom' => $values['id'],
+    'stateTo' => $values['id'],
+  ])->save();
+
+  foreach (array_filter($values['transitions']) as $to) {
+    ModerationStateTransition::create([
+      'id' => $values['id'] . '_' . $to,
+      'status' => TRUE,
+      'label' => $values['label'] . ' » ' . ModerationState::load($to)->label(),
+      'stateFrom' => $values['id'],
+      'stateTo' => $to,
+    ])->save();
+  }
+}
