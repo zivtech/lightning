@@ -11,7 +11,6 @@ function lightning_workflow_form_moderation_state_add_form_alter(array &$form, F
   $form['transitions'] = [
     '#title' => t('Allow transitions to'),
     '#type' => 'checkboxes',
-    '#required' => TRUE,
     '#options' => [],
   ];
   foreach (ModerationState::loadMultiple() as $state) {
