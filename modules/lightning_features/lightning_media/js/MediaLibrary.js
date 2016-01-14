@@ -19,6 +19,8 @@
           return this.library;
         case element === this.upload.el:
           return this.upload;
+        case element === this.embedCode.el:
+          return this.embedCode;
         default:
           break;
       }
@@ -58,6 +60,13 @@
         this.library.backend.unshift(model);
       });
 
+      this.embedCode = new EmbedCode({
+        url: Drupal.url('lightning/embed-code')
+      });
+      this.listenTo(this.embedCode.model, 'sync', function (model) {
+        this.library.backend.unshift(model);
+      });
+
       this.render();
     },
 
@@ -69,22 +78,18 @@
       return text;
     },
 
+    addTab: function (element, title) {
+      element.id = this.randomId();
+      this.el.appendChild(element);
+      return $('<li><a href="#' + element.id + '">' + Drupal.t(title) + '</a></li>');
+    },
+
     render: function () {
       var nav = document.createElement('ul');
 
-      this.library.$el
-        .prop('id', this.randomId())
-        .appendTo(this.el);
-
-      $('<li><a href="#' + this.library.el.id + '">' + Drupal.t('Library') + '</a></li>')
-        .appendTo(nav);
-
-      this.upload.$el
-        .prop('id', this.randomId())
-        .appendTo(this.el);
-
-      $('<li><a href="#' + this.upload.el.id + '">' + Drupal.t('Upload') + '</a></li>')
-        .appendTo(nav);
+      this.addTab(this.library.el, 'Library').appendTo(nav);
+      this.addTab(this.upload.el, 'Upload').appendTo(nav);
+      this.addTab(this.embedCode.el, 'Embed Code').appendTo(nav);
 
       this.$el.prepend(nav).tabs({
         activate: this.onTabActivate.bind(this),
