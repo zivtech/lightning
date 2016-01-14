@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains \Drupal\lightning_media\Controller\EntityCrudController.
+ */
+
 namespace Drupal\lightning_media\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
@@ -49,12 +54,45 @@ abstract class EntityCrudController extends ControllerBase {
     );
   }
 
+  /**
+   * Handles POST (create) requests from the CKEditor media widget.
+   *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The incoming request.
+   *
+   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   */
   abstract public function post(Request $request);
 
+  /**
+   * Handles PUT (save) requests from the CKEditor media widget.
+   *
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The entity to be saved.
+   *
+   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   */
   abstract public function put(EntityInterface $entity);
 
+  /**
+   * Handles DELETE requests from the CKEditor media widget.
+   *
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The entity to be deleted.
+   *
+   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   */
   abstract public function delete(EntityInterface $entity);
 
+  /**
+   * Returns basic info about an entity, for inclusion in a JSON response.
+   *
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The entity.
+   *
+   * @return array
+   *   The entity's type, bundle, ID, UUID, and label.
+   */
   protected function getEntityResponseData(EntityInterface $entity) {
     return array(
       'entity_type' => $entity->getEntityTypeId(),

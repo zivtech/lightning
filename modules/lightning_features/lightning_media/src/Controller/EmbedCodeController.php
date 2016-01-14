@@ -21,6 +21,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Controller for the embed code media widget.
+ */
 class EmbedCodeController extends EntityCrudController {
 
   /**
@@ -116,6 +119,8 @@ class EmbedCodeController extends EntityCrudController {
         $build = $this->entityTypeManager()->getViewBuilder('media')->view($entity);
         $data['preview'] = $this->renderer->render($build);
 
+        // If the rendering process attached any assets, include the requisite
+        // AJAX commands in the response.
         if (isset($build['#attached'])) {
           $fake_response = new AjaxResponse();
           $fake_response->setAttachments($build['#attached']);
@@ -123,8 +128,8 @@ class EmbedCodeController extends EntityCrudController {
           $data['commands'] = $fake_response->getCommands();
         }
 
-        // This, apparently, is needed in order for Drupal.Ajax to trust me.
-        // Which is incredibly dumb, 'cause it's security by obscurity...
+        // This is needed for Drupal.Ajax to trust the response.
+        // @see \Drupal\Core\EventSubscriber\AjaxResponseSubscriber, line 110.
         $response->headers->set('X-Drupal-Ajax-Token', '1');
         $response->setData($data);
       }
@@ -133,18 +138,54 @@ class EmbedCodeController extends EntityCrudController {
     return $response;
   }
 
+  /**
+   * Checks if a string is a valid video embed code (i.e., can be handled by
+   * one of Media Entity Embeddable Video's providers).
+   *
+   * @param string $embed_code
+   *   The embed code to check.
+   *
+   * @return \Drupal\media_entity_embeddable_video\VideoProviderInterface|false
+   *   The video provider if $embed_code is a valid embed code; FALSE otherwise.
+   */
   protected function isVideo($embed_code) {
     return $this->videoProviderManager->getProviderByEmbedCode($embed_code);
   }
 
+  /**
+   * Checks if a string is a valid Twitter embed code.
+   *
+   * @param string $embed_code
+   *   The embed code to check.
+   *
+   * @return bool
+   */
   protected function isTweet($embed_code) {
     return $this->validateStringAs($embed_code, 'TweetEmbedCode');
   }
 
+  /**
+   * Checks if a string is a valid Instagram embed code.
+   *
+   * @param string $embed_code
+   *   The embed code to check.
+   *
+   * @return bool
+   */
   protected function isInstagram($embed_code) {
     return $this->validateStringAs($embed_code, 'InstagramEmbedCode');
   }
 
+  /**
+   * Validates a string against a specific constraint.
+   *
+   * @param string $string
+   *   The string to validate.
+   * @param string $constraint
+   *   The constraint's plugin ID.
+   *
+   * @return bool
+   */
   protected function validateStringAs($string, $constraint) {
     $definition = $this->typedDataManager->createDataDefinition('string');
     $definition->addConstraint($constraint);
