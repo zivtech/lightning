@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: media_bundles
+label: 'Media Bundles'
+service_providers:
+  'entity_index:media_bundle': 'entity_index:media_bundle'
+endpoint: /lightning/media

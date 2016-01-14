@@ -116,6 +116,10 @@ projects:
     type: module
     version: 1.0-beta3
     subdir: contrib
+  services:
+    type: module
+    version: 4.0-alpha2
+    subdir: contrib
 
 libraries:
   backbone.collectionView:
