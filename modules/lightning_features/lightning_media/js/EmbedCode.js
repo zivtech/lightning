@@ -1,4 +1,4 @@
-(function ($, Backbone) {
+(function ($, Backbone, Drupal, drupalSettings) {
   "use strict";
 
   window.EmbedCode = Backbone.View.extend({
@@ -13,11 +13,6 @@
         var self = this;
         var preview = $('.preview', this.el).get(0);
 
-        function onSave (model, response) {
-          preview.innerHTML = response.preview;
-          $(self.footer).show();
-        }
-
         function onDestroy (model) {
           preview.innerHTML = '';
           model.clear();
@@ -26,7 +21,20 @@
 
         var embed_code = event.target.value;
         if (embed_code) {
-          this.model.save({ embed_code: embed_code }, { success: onSave });
+          Drupal.ajax({
+            url: this.model.url(),
+            submit: {
+              embed_code: embed_code
+            }
+          })
+          .execute()
+          .then(function (response) {
+            preview.innerHTML = response.preview;
+            Drupal.attachBehaviors(preview, drupalSettings);
+
+            self.model.set(response);
+            $(self.footer).show();
+          });
         }
         else {
           this.model.destroy({ success: onDestroy });
@@ -80,4 +88,4 @@
 
   });
 
-})(jQuery, Backbone);
+})(jQuery, Backbone, Drupal, drupalSettings);
