@@ -53,7 +53,8 @@
     },
 
     render: function () {
-      this.$el.append('<textarea /><div class="preview" />');
+      $('<textarea />').attr('placeholder', Drupal.t('Enter a URL or embed code...')).appendTo(this.el);
+      this.$el.append('<div class="preview" />');
 
       $('<label />')
       .html(Drupal.t('Save this to my media library'))

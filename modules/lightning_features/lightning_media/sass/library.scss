@@ -89,4 +89,12 @@
       }
     }
   }
+
+  .embed-code {
+    textarea {
+      width: 100%;
+      min-height: 4em;
+      font-size: 150%;
+    }
+  }
 }
