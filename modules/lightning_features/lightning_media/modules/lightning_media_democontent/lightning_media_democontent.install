@@ -19,6 +19,7 @@ function lightning_media_democontent_install() {
     ['type' => 'video', 'value' => '<iframe width="560" height="315" src="https://www.youtube.com/embed/ktCgVopf7D0" frameborder="0" allowfullscreen></iframe>'],
   ];
 
+  $n = 0;
   foreach ($entity_values as $entity_value) {
     $values = [
       'bundle' => $entity_value['type'],
@@ -33,6 +34,7 @@ function lightning_media_democontent_install() {
       ]
     ];
     $entity = Media::create($values)->save();
+    $n++;
   }
 }
 
