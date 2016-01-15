@@ -4,7 +4,6 @@ lightning.media.upload_create:
     _controller: '\Drupal\lightning_media\Controller\UploadController::post'
   requirements:
     _permission: 'dropzone upload files'
-
   methods: ['POST']
 
 lightning.media.upload_delete:
@@ -13,7 +12,6 @@ lightning.media.upload_delete:
     _controller: '\Drupal\lightning_media\Controller\UploadController::delete'
   requirements:
     _permission: 'dropzone upload files'
-    _entity_access: 'file.delete'
   options:
     parameters:
       file:
@@ -26,7 +24,6 @@ lightning.media.upload_save:
     _controller: '\Drupal\lightning_media\Controller\UploadController::put'
   requirements:
     _permission: 'dropzone upload files'
-    _entity_access: 'file.update'
   options:
     parameters:
       file:

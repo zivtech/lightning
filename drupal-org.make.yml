@@ -116,6 +116,14 @@ projects:
     type: module
     version: 1.0-beta3
     subdir: contrib
+  services:
+    type: module
+    version: 4.0-alpha2
+    subdir: contrib
+    patch:
+      # EntityIndex resource should include entity labels.
+      # Committed to Services 8.x-4.x, can be removed at alpha3 or higher.
+      2650532: https://www.drupal.org/files/issues/services-entity_index_label.patch
 
 libraries:
   backbone.collectionView:

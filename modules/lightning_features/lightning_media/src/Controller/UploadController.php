@@ -154,6 +154,7 @@ class UploadController extends EntityCrudController {
     $this->mediaStorage->save($media);
 
     $response = $this->getEntityResponseData($media);
+
     $thumbnail = $media->thumbnail->view();
     $thumbnail['#label_display'] = 'hidden';
     $response['thumbnail'] = $this->renderer->render($thumbnail);

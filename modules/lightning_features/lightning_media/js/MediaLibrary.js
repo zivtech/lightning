@@ -50,7 +50,7 @@
     initialize: function () {
       this.library = new EntityGrid({
         backend:
-          new MediaLibraryBackend([], { baseUrl: Drupal.url('media-library') })
+          new MediaLibraryBackend([], { baseUrl: Drupal.url('lightning/media/library') })
       });
 
       this.upload = new Uploader({
