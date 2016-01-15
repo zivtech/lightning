@@ -1,9 +1,8 @@
-uuid: 85521445-dd41-473b-b307-7fcccc681791
 langcode: en
 status: true
 dependencies:
   module:
-    - image
+    - lightning_media
     - media_entity
     - rest
     - user
@@ -254,7 +253,7 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: target_id
-          type: image
+          type: image_svg
           settings:
             image_style: medium
             image_link: ''
@@ -742,4 +741,3 @@ display:
         - url.query_args
         - user.permissions
       tags: {  }
-
