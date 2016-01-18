@@ -45,9 +45,6 @@ projects:
       branch: 8.x-1.x
       url: https://github.com/phenaproxima/media_entity_twitter.git
     subdir: contrib/media
-    patch:
-      # JQuery and Drupal.js Dependencies
-      2643014: https://www.drupal.org/files/issues/jquery-and-drupal-dependencies-2643014-2.patch
   media_entity_image:
     type: module
     download:
