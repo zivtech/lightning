@@ -27,7 +27,7 @@ function lightning_media_democontent_install() {
       'status' => 1,
       'name' => 'Lightning Media Demo Content ' . $n,
       'embed_code' => [
-        'value' => $entity_value['url'],
+        'value' => $entity_value['value'],
       ],
       'field_media_in_library' => [
         'value' => 1,
