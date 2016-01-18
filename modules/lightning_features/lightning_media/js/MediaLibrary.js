@@ -88,8 +88,8 @@
       var nav = document.createElement('ul');
 
       this.addTab(this.library.el, 'Library').appendTo(nav);
-      this.addTab(this.upload.el, 'Upload').appendTo(nav);
-      this.addTab(this.embedCode.el, 'Embed Code').appendTo(nav);
+      this.addTab(this.upload.el, 'Create Image').appendTo(nav);
+      this.addTab(this.embedCode.el, 'Create Embed').appendTo(nav);
 
       this.$el.prepend(nav).tabs({
         activate: this.onTabActivate.bind(this),
