@@ -1,0 +1,87 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element;
+use Drupal\views\ViewExecutable;
+use Drupal\workbench_moderation\Entity\ModerationState;
+use Drupal\workbench_moderation\Entity\ModerationStateTransition;
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function lightning_workflow_views_pre_render(ViewExecutable $view) {
+  if ($view->storage->id() == 'moderation_history') {
+    foreach ($view->result as $index => $row) {
+      $entity = $row->_entity;
+
+      if (empty($previous) || $previous->moderation_state->target_id != $entity->moderation_state->target_id) {
+        $previous = $entity;
+      }
+      else {
+        unset($view->result[$index]);
+        $view->total_rows--;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function lightning_workflow_form_moderation_state_add_form_alter(array &$form, FormStateInterface $form_state) {
+  $master_element = [
+    'role' => [
+      '#type' => 'select',
+      '#options' => user_role_names(),
+    ],
+    'to_state' => [
+      '#type' => 'select',
+      '#options' => [
+        'any' => \Drupal::translation()->translate('- any -'),
+      ],
+    ],
+  ];
+  foreach (ModerationState::loadMultiple() as $state) {
+    $master_element['to_state']['#options'][$state->id()] = $state->label();
+  }
+
+  $form['transitions'] = [
+    '#tree' => 'TRUE',
+    '#type' => 'fieldset',
+    '#title' => \Drupal::translation()->translate('Transitions'),
+    'add_more' => [
+      '#type' => 'button',
+      '#value' => \Drupal::translation()->translate('Add another'),
+    ],
+  ];
+  $form['transitions'][] = $master_element;
+  $form['add_more']['#weight'] = count($master_element['to_state']['#options']);
+
+  $form['actions']['submit']['#submit'][] = 'lightning_workflow_create_transitions';
+}
+
+/**
+ * Form submit handler. Creates transitions from a new moderation state to
+ * other existing moderation states.
+ */
+function lightning_workflow_create_transitions(array &$form, FormStateInterface $form_state) {
+  $values = $form_state->getValues();
+
+  ModerationStateTransition::create([
+    'id' => $values['id'],
+    'status' => TRUE,
+    'label' => $values['label'] . ' » ' . $values['label'],
+    'stateFrom' => $values['id'],
+    'stateTo' => $values['id'],
+  ])->save();
+
+  foreach (array_filter($values['transitions']) as $to) {
+    ModerationStateTransition::create([
+      'id' => $values['id'] . '_' . $to,
+      'status' => TRUE,
+      'label' => $values['label'] . ' » ' . ModerationState::load($to)->label(),
+      'stateFrom' => $values['id'],
+      'stateTo' => $to,
+    ])->save();
+  }
+}

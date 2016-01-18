@@ -43,7 +43,7 @@ projects:
     download:
       type: git
       branch: 8.x-1.x
-      revision: 179e19e159f7df2172316030fc7c110b6f0d3efd
+      url: https://github.com/phenaproxima/media_entity_twitter.git
     subdir: contrib/media
     patch:
       # JQuery and Drupal.js Dependencies
@@ -95,12 +95,16 @@ projects:
   # ---
   # Workflow. These modules will only be enabled if the associated Lightning
   # Workflow module is enabled.
-  workbench_moderation:
+  scheduled_updates:
     type: module
     download:
       type: git
       branch: 8.x-1.x
-      revision: 89ff94fbd86ed5d8dbfb77d8e548ef42ec6f42e4
+      revision: 146c9806db3464a9c379aab1769555b4807f2d69
+    subdir: contrib/workflow
+  workbench_moderation:
+    type: module
+    version: 1.0-alpha1
     subdir: contrib/workflow
   # ---
   # Other Modules. These modules provide general expected functionality or
@@ -111,6 +115,10 @@ projects:
       type: git
       branch: 8.x-1.x
       revision: 302fc469eb860892fc90403b5d758eb50a715f77
+    subdir: contrib
+  inline_entity_form:
+    type: module
+    version: 1.0-alpha3
     subdir: contrib
   metatag:
     type: module

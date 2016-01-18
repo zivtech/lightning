@@ -9,9 +9,6 @@
 
     render: function () {
       this.el.innerHTML = this.model.get('thumbnail');
-      if (this.model.get('bundle').toLowerCase() !== 'image') {
-        this.el.innerHTML += '<div>' + this.model.get('label') + '</div>';
-      }
     }
 
   });
