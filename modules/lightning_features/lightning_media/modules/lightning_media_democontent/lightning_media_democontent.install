@@ -12,14 +12,12 @@ use Drupal\media_entity\Entity\Media;
  * Lightning Media.
  */
 function lightning_media_democontent_install() {
-
   $entity_values = [
     ['type' => 'instagram', 'value' => 'https://www.instagram.com/p/-Ph6HzvrEl'],
     ['type' => 'tweet', 'value' => 'https://twitter.com/slashrsm/status/657706146979934209'],
     ['type' => 'video', 'value' => '<iframe width="560" height="315" src="https://www.youtube.com/embed/ktCgVopf7D0" frameborder="0" allowfullscreen></iframe>'],
   ];
 
-  $n = 0;
   foreach ($entity_values as $entity_value) {
     $values = [
       'bundle' => $entity_value['type'],
@@ -33,8 +31,7 @@ function lightning_media_democontent_install() {
         'value' => 1,
       ]
     ];
-    $entity = Media::create($values)->save();
-    $n++;
+    Media::create($values)->save();
   }
 }
 
