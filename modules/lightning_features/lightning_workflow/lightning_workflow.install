@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\Core\Entity\Entity\EntityFormDisplay;
 use Drupal\node\Entity\NodeType;
 
 /**
@@ -19,4 +20,22 @@ function lightning_workflow_install() {
     ])
     ->setThirdPartySetting($module, 'default_moderation_state', 'draft')
     ->save();
+
+  /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $form_display */
+  $form_display = EntityFormDisplay::load('node.page.default');
+  $weights = array_map(function (array $component) { return $component['weight']; }, $form_display->getComponents());
+  sort($weights);
+  $form_display->setComponent('scheduled_update', [
+    'type' => 'inline_entity_form_complex',
+    'weight' => end($weights) + 1,
+    'settings' => [
+      'override_labels' => FALSE,
+      'label_singular' => '',
+      'label_plural' => '',
+      'allow_new' => TRUE,
+      'allow_existing' => FALSE,
+      'match_operator' => 'CONTAINS',
+    ],
+    'third_party_settings' => [],
+  ])->save();
 }
