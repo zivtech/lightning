@@ -69,6 +69,9 @@
       this.toLibrary.checked = false;
       $(this.footer).hide();
 
+      $('textarea', this.el).val('');
+      $('.preview', this.el).empty();
+
       var clone = this.model.clone();
       this.model.clear();
       return clone;
@@ -76,14 +79,15 @@
 
     finalize: function () {
       var model = this.model;
+      var reset = this.reset.bind(this);
 
       if (this.toLibrary.checked) {
-        return model.save().then(this.reset.bind(this));
+        return model.save().then(reset);
       }
       else {
         // No need to sync the model to the server, but return a promise for
         // consistency's sake.
-        return Promise.resolve(this.reset());
+        return Promise.resolve(reset());
       }
     }
 
