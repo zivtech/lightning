@@ -63,6 +63,7 @@ projects[scheduled_updates][subdir] = contrib/workflow
 projects[workbench_moderation][type] = module
 projects[workbench_moderation][version] = 1.0-alpha1
 projects[workbench_moderation][subdir] = contrib/workflow
+projects[workbench_moderation][patch][] = https://www.drupal.org/files/issues/workbench_moderation-bug-2650388-10.patch
 projects[acquia_connector][type] = module
 projects[acquia_connector][download][type] = git
 projects[acquia_connector][download][branch] = 8.x-1.x
