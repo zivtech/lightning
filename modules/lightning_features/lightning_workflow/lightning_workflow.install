@@ -1,0 +1,22 @@
+<?php
+
+use Drupal\node\Entity\NodeType;
+
+/**
+ * Implements hook_install().
+ */
+function lightning_workflow_install() {
+  $module = 'workbench_moderation';
+
+  // Enable moderation for the Page content type.
+  NodeType::load('page')
+    ->setThirdPartySetting($module, 'enabled', TRUE)
+    ->setThirdPartySetting($module, 'allowed_moderation_states', [
+      'archived',
+      'draft',
+      'needs_review',
+      'published',
+    ])
+    ->setThirdPartySetting($module, 'default_moderation_state', 'draft')
+    ->save();
+}
