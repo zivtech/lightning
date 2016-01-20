@@ -7,7 +7,7 @@ use Drupal\Core\Block\BlockBase;
 /**
  * @Block(
  *   id = "sloth",
- *   label = @Translation("Baby Sloth!")
+ *   admin_label = @Translation("Baby Sloth!")
  * )
  */
 class Sloth extends BlockBase {
