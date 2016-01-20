@@ -23,14 +23,6 @@ Feature: A CKEditor plugin for creating an embedding media assets in rich text.
     And I execute the "media_library" command in CKEditor "edit-body-0-value"
     Then I should see the image in my media library
 
-  Scenario: Filtering the media library by media type
-    Given I am logged in as a user with the "create page content" permission
-    When I go to "/admin/content"
-    And I click "Add content"
-    And I execute the "media_library" command in CKEditor "edit-body-0-value"
-    And I select "Tweet" from the list of media types
-    Then I should only see the tweets in the media library
-
   Scenario: Generating a live preview of a tweet from an embed code
     Given I am logged in as a user with the "create page content" permission
     When I go to "/admin/content"
@@ -65,6 +57,14 @@ Feature: A CKEditor plugin for creating an embedding media assets in rich text.
     And I press the "Place" button
     And I execute the "media_library" command in CKEditor "edit-body-0-value"
     Then I should see a thumbnail of the tweet in my media library
+
+  Scenario: Filtering the media library by media type
+    Given I am logged in as a user with the "create page content" permission
+    When I go to "/admin/content"
+    And I click "Add content"
+    And I execute the "media_library" command in CKEditor "edit-body-0-value"
+    And I select "Tweet" from the list of media types
+    Then I should only see the tweets in the media library
 
   Scenario: Embedding a YouTube video in CKEditor
     Given I am logged in as a user with the "create page content" permission
