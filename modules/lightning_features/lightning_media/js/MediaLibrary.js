@@ -40,6 +40,13 @@
       this.widget = this.getActiveWidget(ui.panel.get(0));
     },
 
+    addToLibrary: function (model) {
+      // The backend collection will not accept models already in the
+      // collection (as determined by object identity). Passing the attributes
+      // will force the model to be created anew in the collection.
+      this.library.backend.unshift(model.attributes);
+    },
+
     /**
      * Event triggered when a jQuery UI dialog box is closed.
      */
@@ -56,16 +63,12 @@
       this.upload = new Uploader({
         url: Drupal.url('lightning/upload')
       });
-      this.listenTo(this.upload.model, 'sync', function (model) {
-        this.library.backend.unshift(model);
-      });
+      this.listenTo(this.upload.model, 'sync', this.addToLibrary);
 
       this.embedCode = new EmbedCode({
         url: Drupal.url('lightning/embed-code')
       });
-      this.listenTo(this.embedCode.model, 'sync', function (model) {
-        this.library.backend.unshift(model);
-      });
+      this.listenTo(this.embedCode.model, 'sync', this.addToLibrary);
 
       this.render();
     },
