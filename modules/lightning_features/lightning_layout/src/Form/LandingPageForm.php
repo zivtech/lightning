@@ -152,6 +152,8 @@ class LandingPageForm extends FormBase {
         'builder' => 'ipe',
         // The user-facing title of the page.
         'page_title' => $page->label(),
+        'storage_type' => 'page_manager',
+        'storage_id' => $page->id(),
       ],
     ]);
     $this->pageVariantStorage->save($variant);
