@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+id: front
+label: Front
+use_admin_theme: null
+path: /front
+access_logic: and
+access_conditions: {  }
+
