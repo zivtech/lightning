@@ -1,4 +1,4 @@
-(function ($, Backbone, Drupal, drupalSettings) {
+(function ($, Backbone, _, Drupal, drupalSettings) {
   "use strict";
 
   window.EmbedCode = Backbone.View.extend({
@@ -39,7 +39,9 @@
         else {
           this.model.destroy({ success: onDestroy });
         }
-      }
+      },
+
+      'keyup textarea': _.debounce(function (e) { $(e.target).change() }, 600)
 
     },
 
@@ -84,4 +86,4 @@
 
   });
 
-})(jQuery, Backbone, Drupal, drupalSettings);
+})(jQuery, Backbone, _, Drupal, drupalSettings);
