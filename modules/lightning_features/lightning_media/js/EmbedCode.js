@@ -1,4 +1,4 @@
-(function ($, Backbone, Drupal, drupalSettings) {
+(function ($, Backbone, _, Drupal, drupalSettings) {
   "use strict";
 
   window.EmbedCode = Backbone.View.extend({
@@ -39,7 +39,9 @@
         else {
           this.model.destroy({ success: onDestroy });
         }
-      }
+      },
+
+      'keyup textarea': _.debounce(function (e) { $(e.target).change() }, 600)
 
     },
 
@@ -78,19 +80,10 @@
     },
 
     finalize: function () {
-      var model = this.model;
       var reset = this.reset.bind(this);
-
-      if (this.toLibrary.checked) {
-        return model.save().then(reset);
-      }
-      else {
-        // No need to sync the model to the server, but return a promise for
-        // consistency's sake.
-        return Promise.resolve(reset());
-      }
+      return this.toLibrary.checked ? this.model.save().then(reset) : Promise.resolve(reset());
     }
 
   });
 
-})(jQuery, Backbone, Drupal, drupalSettings);
+})(jQuery, Backbone, _, Drupal, drupalSettings);
