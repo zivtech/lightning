@@ -7,6 +7,7 @@
 
 namespace Drupal\lightning_layout\Form;
 
+use Drupal\block\BlockInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;

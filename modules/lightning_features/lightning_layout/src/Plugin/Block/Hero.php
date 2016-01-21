@@ -16,7 +16,7 @@ class Hero extends BlockBase {
     return [
       '#markup' => <<<END
 <div>
-  <img src="/profiles/lightning/modules/lightning_features/lightning_layout/drone1.jpg" alt="Drone racing, TNG" />
+  <img class="img-responsive" src="/profiles/lightning/modules/lightning_features/lightning_layout/drone1.jpg" alt="Drone racing, TNG" />
 </div>
 <h1>The next generation of drone racing</h1>
 END

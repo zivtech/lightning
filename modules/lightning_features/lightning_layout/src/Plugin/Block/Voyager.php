@@ -16,7 +16,7 @@ class Voyager extends BlockBase {
     return [
       '#markup' => <<<END
 <div>
-  <img src="/profiles/lightning/modules/lightning_features/lightning_layout/voyager.jpg" alt="The Voyager" />
+  <img class="img-responsive" src="/profiles/lightning/modules/lightning_features/lightning_layout/voyager.jpg" alt="The Voyager" />
 </div>
 <h3>The Voyager</h3>
 <h4>$349.99</h4>

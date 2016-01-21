@@ -16,7 +16,7 @@ class Annihilator extends BlockBase {
     return [
       '#markup' => <<<END
 <div>
-  <img src="/profiles/lightning/modules/lightning_features/lightning_layout/annihilator.jpg" alt="The Annihilator" />
+  <img class="img-responsive" src="/profiles/lightning/modules/lightning_features/lightning_layout/annihilator.jpg" alt="The Annihilator" />
 </div>
 <h3>The Annihilator</h3>
 <h4>$549.99</h4>

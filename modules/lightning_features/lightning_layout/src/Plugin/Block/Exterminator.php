@@ -16,7 +16,7 @@ class Exterminator extends BlockBase {
     return [
       '#markup' => <<<END
 <div>
-  <img src="/profiles/lightning/modules/lightning_features/lightning_layout/exterminator.png" alt="The Exterminator" />
+  <img class="img-responsive" src="/profiles/lightning/modules/lightning_features/lightning_layout/exterminator.png" alt="The Exterminator" />
 </div>
 <h3>The Exterminator</h3>
 <h4>$249.99</h4>
