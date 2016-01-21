@@ -78,17 +78,8 @@
     },
 
     finalize: function () {
-      var model = this.model;
       var reset = this.reset.bind(this);
-
-      if (this.toLibrary.checked) {
-        return model.save().then(reset);
-      }
-      else {
-        // No need to sync the model to the server, but return a promise for
-        // consistency's sake.
-        return Promise.resolve(reset());
-      }
+      return this.toLibrary.checked ? this.model.save().then(reset) : Promise.resolve(reset());
     }
 
   });
