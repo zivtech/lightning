@@ -40,11 +40,17 @@
       this.widget = this.getActiveWidget(ui.panel.get(0));
     },
 
-    addToLibrary: function (model) {
+    /**
+     * Sync event callback. This is invoked when a model has been saved to the
+     * server, but BEFORE any additional callbacks attached to the jQXHR promise
+     * have run.
+     */
+    addToLibrary: function (model, response) {
       // The backend collection will not accept models already in the
-      // collection (as determined by object identity). Passing the attributes
-      // will force the model to be created anew in the collection.
-      this.library.backend.unshift(model.attributes);
+      // collection (as determined by model ID). Passing the response will
+      // automatically create a plain Backbone.Model in the collection with
+      // those attributes.
+      this.library.backend.unshift(response);
     },
 
     /**
