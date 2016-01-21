@@ -1,0 +1,7 @@
+<?php
+
+function lightning_layout_install() {
+  \Drupal::configFactory()->getEditable('system.site')
+    ->set('page.front', '/front')
+    ->save(TRUE);
+}
