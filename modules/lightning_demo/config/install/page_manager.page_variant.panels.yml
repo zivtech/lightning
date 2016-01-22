@@ -4,12 +4,47 @@ dependencies:
   config:
     - page_manager.page.front
   module:
+    - lightning_demo
     - panels
+_core:
+  default_config_hash: O7DBOJh3gzmow1lCQx0u1sGte21WbseXjEob8jRUEsU
 id: panels
 label: Panels
 variant: panels_variant
 variant_settings:
-  blocks: {  }
+  blocks:
+    b7e711f7-eaf1-4168-b600-e363037cbf12:
+      id: carousel
+      label: Carousel
+      provider: lightning_demo
+      label_display: '0'
+      region: header
+      uuid: b7e711f7-eaf1-4168-b600-e363037cbf12
+      weight: 1
+    6f419765-a6cb-4c50-9f00-abc7bdb4cd12:
+      id: video
+      label: Video
+      provider: lightning_demo
+      label_display: '0'
+      region: column2
+      uuid: 6f419765-a6cb-4c50-9f00-abc7bdb4cd12
+      weight: 1
+    5913a8c2-075c-4964-bb05-5e2e42c7324b:
+      id: ipsum
+      label: 'Live for speed'
+      provider: lightning_demo
+      label_display: visible
+      region: column1
+      uuid: 5913a8c2-075c-4964-bb05-5e2e42c7324b
+      weight: 1
+    b073f668-e225-4404-a225-374c1b45d8b0:
+      id: ipsum
+      label: 'Random Ipsum'
+      provider: lightning_demo
+      label_display: '0'
+      region: column1
+      uuid: b073f668-e225-4404-a225-374c1b45d8b0
+      weight: 2
   id: panels_variant
   uuid: fb081b91-915f-4b76-a200-b6ddcb16082f
   label: null
