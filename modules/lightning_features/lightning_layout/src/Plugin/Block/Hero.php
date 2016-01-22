@@ -20,14 +20,16 @@ class Hero extends BlockBase {
         ],
       ],
       '#markup' => <<<END
-<div>
-  <img class="img-responsive" src="/profiles/lightning/modules/lightning_features/lightning_layout/drone1.jpg" alt="Drone racing, TNG" />
-</div>
-<div>
-  <img class="img-responsive" src="/profiles/lightning/modules/lightning_features/lightning_layout/operator.jpg" alt="Drone operator" />
-</div>
-<div>
-  <img class="img-responsive" src="/profiles/lightning/modules/lightning_features/lightning_layout/drone2.jpg" alt="The Predator. It will hide in the bushes and spring its awesomeness upon you." />
+<div class="slick">
+  <div>
+    <img class="img-responsive" src="/profiles/lightning/modules/lightning_features/lightning_layout/drone1.jpg" alt="Drone racing, TNG" />
+  </div>
+  <div>
+    <img class="img-responsive" src="/profiles/lightning/modules/lightning_features/lightning_layout/operator.jpg" alt="Drone operator" />
+  </div>
+  <div>
+    <img class="img-responsive" src="/profiles/lightning/modules/lightning_features/lightning_layout/drone2.jpg" alt="The Predator. It will hide in the bushes and spring its awesomeness upon you." />
+  </div>
 </div>
 <h1>The next generation of drone racing</h1>
 END
