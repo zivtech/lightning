@@ -5,3 +5,14 @@ landing_page_form:
   dependencies:
     - core/jquery
     - core/underscore
+
+slick:
+  version: 1.5.9
+  js:
+    '//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.min.js':
+      minified: true
+      external: true
+  css:
+    component:
+      '//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css':
+        external: true
