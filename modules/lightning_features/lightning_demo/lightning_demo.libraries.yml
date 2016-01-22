@@ -16,7 +16,7 @@ carousel:
   dependencies:
     - 'lightning_demo/slick'
   js:
-    '/profiles/lightning/modules/lightning_demo/js/carousel.js': {}
+    '/profiles/lightning/modules/lightning_features/lightning_demo/js/carousel.js': {}
   css:
     component:
-      '/profiles/lightning/modules/lightning_demo/css/carousel.css': {}
+      '/profiles/lightning/modules/lightning_features/lightning_demo/css/carousel.css': {}
