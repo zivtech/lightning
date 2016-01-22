@@ -1,0 +1,22 @@
+slick:
+  version: 1.5.9
+  dependencies:
+    - 'core/jquery'
+  css:
+    component:
+      '//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.css':
+        external: true
+  js:
+    '//cdn.jsdelivr.net/jquery.slick/1.5.9/slick.min.js':
+      external: true
+      minified: true
+
+carousel:
+  version: VERSION
+  dependencies:
+    - 'lightning_demo/slick'
+  js:
+    '/profiles/lightning/modules/lightning_demo/js/carousel.js': {}
+  css:
+    component:
+      '/profiles/lightning/modules/lightning_demo/css/carousel.css': {}

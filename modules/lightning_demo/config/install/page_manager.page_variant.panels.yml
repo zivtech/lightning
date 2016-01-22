@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.front
+  module:
+    - panels
+id: panels
+label: Panels
+variant: panels_variant
+variant_settings:
+  blocks: {  }
+  id: panels_variant
+  uuid: fb081b91-915f-4b76-a200-b6ddcb16082f
+  label: null
+  weight: 0
+  layout: radix_sutro
+  layout_settings: {  }
+  page_title: ''
+  storage_type: page_manager
+  storage_id: panels
+  builder: ipe
+page: front
+weight: 0
+selection_criteria: {  }
+selection_logic: and
+static_context: {  }
