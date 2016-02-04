@@ -110,8 +110,8 @@
       this.addTab(this.embedCode.el, 'Create Embed').appendTo(nav);
 
       this.$el.prepend(nav).tabs({
-        activate: $.proxy(this.onTabActivate, this),
-        create: $.proxy(this.onTabCreate, this),
+        activate: $.proxy(this, 'onTabActivate'),
+        create: $.proxy(this, 'onTabCreate'),
         show: 400
       });
     }

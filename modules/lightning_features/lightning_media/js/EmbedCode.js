@@ -89,7 +89,7 @@
     },
 
     finalize: function () {
-      var reset = $.proxy(this.reset, this);
+      var reset = $.proxy(this, 'reset');
       return this.toLibrary.checked ? this.model.save().then(reset) : Promise.resolve(reset());
     }
 
