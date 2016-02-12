@@ -110,6 +110,10 @@ projects:
     type: module
     version: 1.0-beta3
     subdir: contrib
+  search_api:
+    type: module
+    version: 1.0-alpha12
+    subdir: contrib
   services:
     type: module
     version: 4.0-alpha3
