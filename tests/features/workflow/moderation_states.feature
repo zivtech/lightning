@@ -20,10 +20,9 @@ Feature: Workflow moderation states
 
   Scenario: Publishing an entity by transitioning it to a published state
     Given I am logged in as a user with the "view any unpublished content,use draft_needs_review transition,use needs_review_published transition,create page content,edit own page content,create url aliases" permissions
-    When I visit "/node/add/page"
-    And I fill in "title[0][value]" with "Moderation Test 3"
-    And I fill in "path[0][alias]" with "/mod-3"
-    And I press "Save and Request Review"
+    And "page" content:
+      | title             | path   | moderation_state |
+      | Moderation Test 3 | /mod-3 | needs_review     |
     And I visit "/mod-3"
     And I click "Edit draft"
     And I press "Save and Publish"
@@ -33,10 +32,9 @@ Feature: Workflow moderation states
 
   Scenario: Transitioning published content to an unpublished state
     Given I am logged in as a user with the "use draft_published transition,use published_archived transition,create page content,edit own page content,create url aliases" permissions
-    When I visit "/node/add/page"
-    And I fill in "title[0][value]" with "Moderation Test 4"
-    And I fill in "path[0][alias]" with "/mod-4"
-    And I press "Save and Publish"
+    And "page" content:
+      | title             | path   | moderation_state |
+      | Moderation Test 4 | /mod-4 | published        |
     And I visit "/mod-4"
     And I click "New draft"
     And I press "Save and Archive"
@@ -63,3 +61,4 @@ Feature: Workflow moderation states
     And I should not see "Graham Chapman"
     And I should not see "Terry Jones"
     And I should see "Eric Idle"
+
