@@ -219,12 +219,11 @@ class LightningSubContext extends DrupalSubContextBase implements DrupalSubConte
    */
   public function cleanupTheAlias($path_alias) {
     if ($this->getDriver()->isBootstrapped()) {
-      if ($system_path = \Drupal::service('path.alias_manager')->getPathByAlias($path_alias, null)) {
-        \Drupal::service('path.alias_storage')->delete(array('source' => $system_path));
+      $system_path = \Drupal::service('path.alias_manager')->getPathByAlias($path_alias, null);
+      if ($system_path == $path_alias) {
+        throw new \RuntimeException('Path alias `' . $path_alias . '` not found.');
       }
-      else {
-        throw \RuntimeException('Path alias not found.');
-      }
+      \Drupal::service('path.alias_storage')->delete(array('source' => $system_path));
     }
     else {
       throw new \RuntimeException('Drupal is not bootstrapped.');
