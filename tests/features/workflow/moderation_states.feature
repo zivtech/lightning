@@ -19,7 +19,7 @@ Feature: Workflow moderation states
     Then the response status code should be 200
 
   Scenario: Publishing an entity by transitioning it to a published state
-    Given I am logged in as a user with the "view any unpublished content,use draft_needs_review transition,use needs_review_published transition,create page content,edit own page content,create url aliases" permissions
+    Given I am logged in as a user with the "view any unpublished content,use draft_needs_review transition,use needs_review_published transition,create page content,edit any page content,create url aliases" permissions
     And "page" content:
       | title             | path   | moderation_state |
       | Moderation Test 3 | /mod-3 | needs_review     |
@@ -29,9 +29,10 @@ Feature: Workflow moderation states
     And I visit "/user/logout"
     And I visit "/mod-3"
     Then the response status code should be 200
+    Then cleanup the "/mod-3" alias
 
   Scenario: Transitioning published content to an unpublished state
-    Given I am logged in as a user with the "use draft_published transition,use published_archived transition,create page content,edit own page content,create url aliases" permissions
+    Given I am logged in as a user with the "use draft_published transition,use published_archived transition,create page content,edit any page content,create url aliases" permissions
     And "page" content:
       | title             | path   | moderation_state |
       | Moderation Test 4 | /mod-4 | published        |
@@ -41,6 +42,7 @@ Feature: Workflow moderation states
     And I visit "/user/logout"
     And I go to "/mod-4"
     Then the response status code should be 403
+    Then cleanup the "/mod-4" alias
 
   Scenario: Filtering content by moderation state
     Given I am logged in as a user with the "access content overview" permission
