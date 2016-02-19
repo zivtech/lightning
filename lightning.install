@@ -64,14 +64,6 @@ function lightning_install() {
       'link' => ['uri' => 'internal:/admin/content/media'],
     ]
   )->save();
-  Shortcut::create(
-    [
-      'shortcut_set' => 'default',
-      'title' => t('Create landing page'),
-      'weight' => 3,
-      'link' => ['uri' => 'internal:/admin/structure/landing-page'],
-    ]
-  )->save();
 
   // Set the default and admin theme
   \Drupal::configFactory()
@@ -475,5 +467,19 @@ function lightning_install() {
       'page_1' => $display['page_1'],
     ])
     ->save(TRUE);
+}
+
+/**
+ * Deletes the `Create Landing Page` toolbar shortcut.
+ */
+function lightning_update_8001() {
+  Shortcut::delete(
+    [
+      'shortcut_set' => 'default',
+      'title' => t('Media library'),
+      'weight' => 2,
+      'link' => ['uri' => 'internal:/admin/content/media'],
+    ]
+  )->save();
 }
 
