@@ -473,15 +473,15 @@ function lightning_install() {
  * Deletes the `Create Landing Page` toolbar shortcut.
  */
 function lightning_update_8001() {
- $query = \Drupal::entityQuery('shortcut')
+  $query = \Drupal::entityQuery('shortcut')
     ->condition('title', 'Create landing page', 'CONTAINS');
- $nids = $query->execute();
+  $nids = $query->execute();
 
- if (count($nids) != 1) {
-   throw new UpdateException('Unable to unambiguously identify the Landing Page shortcut.');
- }
- else {
-   Shortcut::load(reset($nids))->delete();
- }
+  if (count($nids) != 1) {
+    throw new UpdateException('Unable to unambiguously identify the Landing Page shortcut.');
+  }
+  else {
+    Shortcut::load(reset($nids))->delete();
+  }
 }
 
