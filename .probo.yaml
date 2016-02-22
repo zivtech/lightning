@@ -2,7 +2,7 @@ steps:
   - name: Update Composer
     command: '/usr/local/bin/composer self-update'
   - name: Install drush-master for d8
-    command: 'cd /root/.composer ; composer global require pear/console_table:v1.3.0 ; composer global require drush/drush:dev-master '
+    command: 'composer global require drush/drush ; cd /usr/local/bin ; mv drush drush7 ; ln -s $HOME/.composer/vendor/bin/drush drush'
   - name: Run the profile script
     command: './$SRC_DIR/.probo-profile-build.sh'
   - name: Run install
