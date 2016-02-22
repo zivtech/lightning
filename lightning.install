@@ -6,6 +6,9 @@
  * profile.
  */
 
+use Drupal\Core\Config\FileStorage;
+use Drupal\Core\Config\InstallStorage;
+use Drupal\field\Entity\FieldConfig;
 use Drupal\user\Entity\User;
 use Drupal\user\RoleInterface;
 use Drupal\shortcut\Entity\Shortcut;
@@ -477,3 +480,22 @@ function lightning_install() {
     ->save(TRUE);
 }
 
+function lightning_read_config($id, $module = 'lightning') {
+  static $storage;
+  if (empty($storage)) {
+    $dir = \Drupal::service('module_handler')->getModule($module)->getPath();
+    $storage = new FileStorage($dir . '/' . InstallStorage::CONFIG_INSTALL_DIRECTORY);
+  }
+  return $storage->read('field.field.block_content.basic.body');
+}
+
+/**
+ * Installs the body field on the basic block_content type.
+ */
+function lightning_update_8001() {
+  $field = FieldConfig::load('block_content.basic.body');
+  if (empty($field)) {
+    $values = lightning_read_config('field.field.block_content.basic.body');
+    FieldConfig::create($values)->save();
+  }
+}
